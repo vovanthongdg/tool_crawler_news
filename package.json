@@ -1,0 +1,25 @@
+{
+  "name": "crawler-news-app-nightmare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thongdg",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.4",
+    "axios": "^0.27.2",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "multer-sftp": "^1.1.1",
+    "mysql": "^2.18.1",
+    "nightmare": "^2.10.0",
+    "queue": "^6.0.2",
+    "request-progress": "^3.0.0",
+    "scroll-to-bottomjs": "^1.1.0",
+    "shelljs": "^0.8.5",
+    "ssh2-sftp-client": "^9.0.4"
+  }
+}
