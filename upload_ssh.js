@@ -1,13 +1,13 @@
-let fs = request ('fs'); 
-let Client = request ('ssh2-sftp-client'); 
+let fs = require ('fs'); 
+let Client = require ('ssh2-sftp-client'); 
 let client = new Client ();
 let config = { 
-    host: 'Replace-with-host.compute.amazonaws.com', 
+    host: 'ec2-3-0-209-240.ap-southeast-1.compute.amazonaws.com', 
     port: 22, 
-    username: 'ec2-user', 
-    privateKey: Request ('fs'). readFileSync ('Replace-with-path- to-pemfile.pem ') 
+    username: 'ubuntu', 
+    privateKey: Request ('fs'). readFileSync ('C:/Users/vovan/Desktop/keyvps/fastnews.pem ') 
 };
-let localFile = '/path/to/your/local/file.js'; 
+let localFile = './1234.wav'; 
 let remoteFile = '/home/fastnews33.site/public_html/audio';
 client.connect (config) .then (() => client.fastPut (localFile, remoteFile)). then (() => { 
     client.end (); 

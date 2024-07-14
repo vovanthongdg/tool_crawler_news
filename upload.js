@@ -20,8 +20,8 @@ const newFileUpload = function (req, res, next) {
   var upload = multer({ storage: storage }).array('file');
 
     upload(req,res,function(err){
-        logger.debug(JSON.stringify(req.body));
-              logger.debug(JSON.stringify(req.files));
+        logger.debug(JSON.stringify(req?.body));
+              logger.debug(JSON.stringify(req?.files));
           if(err){
                logger.debug("Error Occured", JSON.stringify(err));
                res.json({error_code:1,err_desc:err});

@@ -2,10 +2,10 @@ const mysql = require('mysql');
 
 
 const conn = mysql.createConnection({
-    host    : '3.0.209.240',  
+    host    : 'localhost',  
     user    : 'root',
-    password: 'a7ed48b900cb04a0b',
-    database: 'fastnews'
+    password: '',
+    database: 'newsapp'
 });
 //kết nối.
 conn.connect(function (err){

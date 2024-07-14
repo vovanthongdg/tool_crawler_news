@@ -114,28 +114,28 @@ nightmare.goto('https://zingnews.vn/video')
               })
               .end()
               .then(result => {
-                console.log(result)
-                cb(null, result);
-                // if (!result) {
-                //   cb(null, {});
-                // }
+                // console.log(result)
+                // cb(null, result);
+                if (!result) {
+                  cb(null, {});
+                }
                 
-                // try {
-                //   //update csdl
-                //   let sql = "INSERT IGNORE INTO articlesdetails (id_category, id_page, title, summary, url_image, content, caption) VALUES ('10', '3', '"+result.title+"', '"+result.summary+"', '"+result.urlImage+"', '"+result.content+"', '"+result.caption+"')";
-                //   conn
-                //     .query(sql, function (err, result) {
-                //         if (err) {
-                //           throw err;
-                //         }
-                //           console.log("thêm thành công!!");// thêm vào CSDL thành công;
-                //       });
-                //     cb(null, result); 
+                try {
+                  //update csdl
+                  let sql = "INSERT IGNORE INTO articlesdetails (id_category, id_page, title, summary, url_image, content, caption) VALUES ('10', '3', '"+result.title+"', '"+result.summary+"', '"+result.urlImage+"', '"+result.content+"', '"+result.caption+"')";
+                  conn
+                    .query(sql, function (err, result) {
+                        if (err) {
+                          throw err;
+                        }
+                          console.log("thêm thành công!!");// thêm vào CSDL thành công;
+                      });
+                    cb(null, result); 
                   
-                // } catch (err) {
-                //   console.log(err.message);
-                //   cb(null, {});
-                // }
+                } catch (err) {
+                  console.log(err.message);
+                  cb(null, {});
+                }
           })
           .catch(error => { // xử lý trong trường hợp gặp lỗi 
             console.log('ERROR: ', error);

@@ -3,14 +3,21 @@ const Nightmare = require('nightmare');
 const scrollToBottom = require('scroll-to-bottomjs');
 const async = require('async');
 const conn = require('./connect.js');
-const getAudio = require ('./audio.js')
+const getAudio = require ('./audio.js');
+const schedule = require('node-schedule');
+
+const crawler = () => {
  // thêm option lúc khởi tạo nightmare
 const nightmare = Nightmare({
-  gotoTimeout: 10000,
-  show: true // hiển thị web khi chạy, nếu không có option này thì chạy ẩn
+  gotoTimeout: 20000,
+  show: true, // hiển thị web khi chạy, nếu không có option này thì chạy ẩn
+  switches: {
+        
+    'ignore-certificate-errors': true
+  }
 })
 // sau khi khởi tạo -> truy xuất vào trang vnexpress.net
-nightmare.goto('https://zingnews.vn/phap-luat.html')
+nightmare.goto('https://zingnews.vn/bat-dong-san.html')
 // .wait(2000)
 .evaluate(scrollToBottom)
 .wait(2000)
@@ -40,7 +47,7 @@ nightmare.goto('https://zingnews.vn/phap-luat.html')
   .then(titlesarr => { // titles trong then() này chính là kết quả titles đc trả về ở trên
     crawl(titlesarr, function(err, res){
         if(err) {
-            console.log(err.message)
+            console.log('gdfg', err.message)
         }
         console.log('Hoàn thành crawl');
         // console.log('Số lượng bài viết: ', titlesarr.length);
@@ -49,7 +56,7 @@ nightmare.goto('https://zingnews.vn/phap-luat.html')
     
   })
   .catch(error => { // xử lý trong trường hợp gặp lỗi 
-    console.log('ERROR: ', error);
+    console.log('ERROR55: ', error);
   })
 
   /**
@@ -115,7 +122,7 @@ nightmare.goto('https://zingnews.vn/phap-luat.html')
           
                         return obj;
                 }catch (err) {
-                  console.log(err.message);
+                  console.log('sdsdf', err.message);
                   return {};
                 }
               })
@@ -128,10 +135,12 @@ nightmare.goto('https://zingnews.vn/phap-luat.html')
                 }
                 
                 try {
+                  //get au
                     let id = Math.floor(100000 + Math.random() * 900000)
                     getAudio(result.title+result.summary, id)
                   // update csdl
                   let sql = "INSERT IGNORE INTO articlesdetails (id_category, id_page, title, summary, url_image, content, caption, url_audio) VALUES ('5', '3', '"+result.title+"', '"+result.summary+"', '"+result.urlImage+"', '"+result.content+"', '"+result.caption+"', '"+id+"')";
+                  // let sql = "INSERT IGNORE INTO articlesdetails (id_category, id_page, title, summary, url_image, content, caption) VALUES (3, 1,'"+result.title+"', '"+result.summary+"', '"+result.urlImage+"', '"+result.content+"', '"+result.caption+"')";
                   conn
                     .query(sql, function (err, result) {
                         if (err) {
@@ -158,3 +167,7 @@ nightmare.goto('https://zingnews.vn/phap-luat.html')
     });
 
   }
+}
+crawler();
+module.exports = crawler
+
